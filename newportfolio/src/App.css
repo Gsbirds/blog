@@ -1,6 +1,7 @@
 
 body{
   background-color: #282c34;
+  font-family: 'IBM Plex Mono', monospace;
 }
 
 .container{
@@ -20,14 +21,24 @@ body{
 }
 
 .custom-color-picker {
-  margin: 30px;
+  margin: 10px;
 }
 
 .container{
   margin: 50px;
+  padding:30px;
 }
 
 .blog-title{
   margin:30px;
+  margin-top: 90px;
+margin-left: 70px;
+}
 
+.poem{
+  margin-left: 70px;
+}
+
+.poem ul{
+  list-style-type: none;
 }

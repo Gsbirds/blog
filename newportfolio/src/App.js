@@ -5,7 +5,7 @@ import Wheel from "./Wheel";
 import { ColorPicker, useColor } from "react-color-palette";
 import "react-color-palette/lib/css/styles.css";
 import React, { Component } from "react";
-import { CirclePicker } from 'react-color';
+import { GithubPicker } from 'react-color';
 import { CustomPicker } from 'react-color';
 import Nav from "./Nav.js"
 
@@ -48,7 +48,7 @@ function App() {
 
         <BrowserRouter>
         <Nav text={text}/>
-        <CirclePicker className="custom-color-picker" onChangeComplete={ setColor } />
+        <GithubPicker className="custom-color-picker" onChangeComplete={ setColor } />
 
           <Routes>
           {/* <Route path="/" element={<ColorPicker />} /> */}

@@ -19,12 +19,16 @@ function Nav(props) {
                 <span className="navbar-toggler-icon"></span>
             </button>
             <div className="collapse navbar-collapse" id="navbarNav">
+                <b>
                 <ul className="navbar-nav">
+                    
                     <li className="nav-item">
                         <NavLink style={{color: props.text}} className="nav-link" aria-current="page" to="/">
                             Home
                         </NavLink>
                     </li>
+                    
+
             <li> <NavLink style={{color: props.text}} className="nav-link" aria-current="page" to="/Wheel">
                             Blog
                         </NavLink></li>
@@ -33,6 +37,7 @@ function Nav(props) {
                         </NavLink></li>
                     
                 </ul>
+                </b>
             </div>
         </nav>
     );
