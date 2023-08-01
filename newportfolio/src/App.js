@@ -44,15 +44,14 @@ function App() {
 
   return (
     <>
-      <div>
+      <div className="app">
 
         <BrowserRouter>
         <Nav text={text}/>
+        {/* <img src="./shutterstock_379752358.webp" style={{width:100}}></img> */}
         <GithubPicker className="custom-color-picker" onChangeComplete={ setColor } />
 
           <Routes>
-          {/* <Route path="/" element={<ColorPicker />} /> */}
-
             <Route path="/Wheel" element={<Wheel text={text} color={actColor}/>} />
           </Routes>
         </BrowserRouter>

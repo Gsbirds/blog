@@ -22,6 +22,12 @@ body{
 
 .custom-color-picker {
   margin: 10px;
+/* visibility: hidden; */
+}
+
+nav:hover + .custom-color-picker{
+  margin: 10px;
+
 }
 
 .container{
