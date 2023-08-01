@@ -14,15 +14,15 @@ DATABASE_URL = config('DATABASE_URL')
 
 # Database table definitions.
 metadata = sqlalchemy.MetaData()
-engine = sqlalchemy.create_engine(DATABASE_URL)
-metadata.create_all(engine)
 
-notes = sqlalchemy.Table(
-    "notes",
+blogs = sqlalchemy.Table(
+    "blogs",
     metadata,
     sqlalchemy.Column("id", sqlalchemy.Integer, primary_key=True),
     sqlalchemy.Column("text", sqlalchemy.String),
-    sqlalchemy.Column("completed", sqlalchemy.Boolean),
+    sqlalchemy.Column("title", sqlalchemy.String),
+    sqlalchemy.Column("date", sqlalchemy.String),
+
 )
 
 engine = sqlalchemy.create_engine(DATABASE_URL)
@@ -36,33 +36,35 @@ async def lifespan(app):
     await database.disconnect()
 
 # Main application code.
-async def list_notes(request):
-    query = notes.select()
+async def list_blogs(request):
+    query = blogs.select()
     results = await database.fetch_all(query)
     content = [
         {
             "text": result["text"],
-            "completed": result["completed"]
+            "title": result["title"]
         }
         for result in results
     ]
     return JSONResponse(content)
 
-async def add_note(request):
+async def add_blog(request):
     data = await request.json()
-    query = notes.insert().values(
+    query = blogs.insert().values(
        text=data["text"],
-       completed=data["completed"]
+       title=data["title"],
+       date=data["date"]
     )
     await database.execute(query)
     return JSONResponse({
         "text": data["text"],
-        "completed": data["completed"]
+        "title": data["title"],
+        "date": data["date"]
     })
 
 routes = [
-    Route("/notes", endpoint=list_notes, methods=["GET"]),
-    Route("/notes", endpoint=add_note, methods=["POST"]),
+    Route("/blogs", endpoint=list_blogs, methods=["GET"]),
+    Route("/blogs", endpoint=add_blog, methods=["POST"]),
 ]
 
 app = Starlette(
