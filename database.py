@@ -1,5 +1,5 @@
 import contextlib
-
+from sqlalchemy import ForeignKey
 import databases
 import sqlalchemy
 from starlette.applications import Starlette
@@ -22,6 +22,18 @@ blogs = sqlalchemy.Table(
     sqlalchemy.Column("text", sqlalchemy.String),
     sqlalchemy.Column("title", sqlalchemy.String),
     sqlalchemy.Column("date", sqlalchemy.String),
+
+)
+
+comments = sqlalchemy.Table(
+    "comments",
+    metadata,
+    sqlalchemy.Column("id", sqlalchemy.Integer, primary_key=True),
+    sqlalchemy.Column("text", sqlalchemy.String),
+    sqlalchemy.Column("title", sqlalchemy.String),
+    sqlalchemy.Column("date", sqlalchemy.String),
+    sqlalchemy.Column("name", sqlalchemy.String),
+    sqlalchemy.Column("blogs_id", sqlalchemy.Integer, ForeignKey("blogs.id")),
 
 )
 
@@ -62,9 +74,45 @@ async def add_blog(request):
         "date": data["date"]
     })
 
+async def list_comments(request):
+    query = comments.select()
+    results = await database.fetch_all(query)
+    content = [
+        {
+            "text": result["text"],
+            "title": result["title"],
+            "date": result["date"],
+            "name": result["name"],
+            "blogs_id":result["blogs_id"]
+        }
+        for result in results
+    ]
+    return JSONResponse(content)
+
+async def add_comment(request):
+    data = await request.json()
+    query = comments.insert().values(
+       text=data["text"],
+       title=data["title"],
+       date=data["date"],
+       name=data["name"],
+       blogs_id=data["blogs_id"]
+
+    )
+    await database.execute(query)
+    return JSONResponse({
+        "text": data["text"],
+        "title": data["title"],
+        "date": data["date"],
+        "name":data["name"],
+        "blogs_id":data["blogs_id"]
+    })
+
 routes = [
     Route("/blogs", endpoint=list_blogs, methods=["GET"]),
     Route("/blogs", endpoint=add_blog, methods=["POST"]),
+      Route("/comments", endpoint=list_comments, methods=["GET"]),
+    Route("/comments", endpoint=add_comment, methods=["POST"]),
 ]
 
 app = Starlette(
