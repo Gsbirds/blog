@@ -48,3 +48,10 @@ margin-left: 70px;
 .poem ul{
   list-style-type: none;
 }
+
+#comment-box{
+  width:800px;
+  border-radius: 15px;
+  height:424px;
+  border:2px solid black;
+}

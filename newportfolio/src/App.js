@@ -8,7 +8,7 @@ import React, { Component } from "react";
 import { GithubPicker } from 'react-color';
 import { CustomPicker } from 'react-color';
 import Nav from "./Nav.js"
-
+import Comment from "./Comment";
 
 function App() {
 
@@ -53,6 +53,8 @@ function App() {
 
           <Routes>
             <Route path="/Wheel" element={<Wheel text={text} color={actColor}/>} />
+            <Route path="/Comment" element={<Comment text={text} color={actColor}/>} />
+
           </Routes>
         </BrowserRouter>
       </div>
