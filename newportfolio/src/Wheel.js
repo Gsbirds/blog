@@ -7,12 +7,31 @@ import Comment from "./Comment";
 function Wheel(props) {
     const [blog, setBlog] = useState("");
     const [comment, setComment] = useState("");
+    const [hiddenC, setHiddenC] = useState("hiddenC");
+    const [hiddenF, setHiddenF]= useState("hiddenF");
 
+    const showComments = () => {
+        if (hiddenC=="hiddenC"){
+        setHiddenC("visibleV");
+        } else{
+            setHiddenC("hiddenC")
+        }
+      };
 
+    
+      const addComments = () => {
+        if (hiddenF=="hiddenF"){
+        setHiddenF("visibleF");
+        } else{
+            setHiddenF("hiddenF")
+        }
+      };
+      
     const fetchBlogs1 = {
         method: 'GET',
         url: 'http://localhost:8000/blogs',
     }
+
     useEffect(() => {
         const fetchBlogs = async () => {
             axios.get(fetchBlogs1.url).then((response) => {
@@ -95,10 +114,12 @@ function Wheel(props) {
                                     <b>
                                         <p style={{ color: props.color }}>{blog.title}</p>
                                     </b>
+
+                                    <p className="arrow" onClick={showComments} style={{ color:props.color, fontSize: 100 }}><b>˅</b></p>
                                     {comment
                                         .filter((c) => c.blogs_id === blog.id)
                                         .map((c) => (
-                                            <div key={c.id} style={{ backgroundColor: props.color, width: 900 }} className="container">
+                                            <div id={hiddenC} key={c.id} style={{ backgroundColor: props.color, width: 900 }} className="container">
                                                 <b>
                                                     {/* Render the filtered comments' titles */}
                                                     <p style={{ color: props.text }}>{c.title}</p>
@@ -106,12 +127,17 @@ function Wheel(props) {
                                             </div>
                                         ))}
                                 </div>
+                                
                             );
-                            elements.push(<Comment key={`comment_${blog.id}`} />);
+
+                            elements.push(<p className="arrow" onClick={addComments} style={{ color:props.text, fontSize: 50 }}><b>Comment</b></p>, <Comment hiddenF={hiddenF} blogid={blog.id} key={`comment_${blog.id}`}/> 
+                            );
+
+
                             return elements;
                         })}
-                    </>
 
+                    </>
                 </>
                 : ""
             }

@@ -37,7 +37,7 @@ function Comment(props) {
       data.name = name;
       data.text = text;
       data.date= date;
-      data.blogs_id = 1;
+      data.blogs_id = props.blogid;
   
       const Url = "http://localhost:8000/comments";
       const fetchConfig = {
@@ -60,7 +60,7 @@ function Comment(props) {
     return (
    <>
 
-    <div className="row">
+    <div id={props.hiddenF} className="row">
       <div className="offset-3 col-6">
         <div   style={{ backgroundColor: props.text}} id= "comment-box" className="shadow p-4 mt-4">
           <h1>Add a comment</h1>
