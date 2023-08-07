@@ -50,7 +50,7 @@ function App() {
         <Nav text={text}/>
         {/* <img src="./shutterstock_379752358.webp" style={{width:100}}></img> */}
         <GithubPicker className="custom-color-picker" onChangeComplete={ setColor } />
-
+    <img className="veloci" src="./veloci.png" style={{width:1500, position:"background"}}/>
           <Routes>
             <Route path="/Wheel" element={<Wheel text={text} color={actColor}/>} />
             <Route path="/Comment" element={<Comment text={text} color={actColor}/>} />
