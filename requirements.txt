@@ -12,7 +12,7 @@ httptools==0.1.2
 idna==2.8
 keyring==18.0.1
 paramiko==2.6.0
-Pillow==7.0.0
+# Pillow==7.0.0
 plumber==1.7
 protobuf==3.6.1
 pyOpenSSL==19.0.0
