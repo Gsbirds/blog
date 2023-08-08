@@ -1,7 +1,6 @@
 aiomysql==0.2.0
 aiosqlite==0.19.0
 anyio==3.7.1
-apturl==0.5.2
 bcrypt==3.1.7
 blinker==1.4
 Brlapi==0.7.0
