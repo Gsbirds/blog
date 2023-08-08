@@ -11,11 +11,6 @@ cors==1.0.1
 cryptography==2.8
 databases==0.7.0
 dbus-python==1.2.16
-defer==1.0.6
-dell-recovery==0.0.0
-DellLinuxAssistant==0.0.0
-distro==1.4.0
-distro-info===0.23ubuntu1
 duplicity==0.8.12.0
 entrypoints==0.3
 exceptiongroup==1.1.2
