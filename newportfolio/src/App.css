@@ -2,7 +2,17 @@
 body{
   background-color: #282c34;
   font-family: 'IBM Plex Mono', monospace;
+  opacity: .9;
+
+  min-height: 500px;
+
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-image:url( /home/gux/NewPortfolio/newportfolio/public/veloci.png);
 }
+
 
 .container{
   border-radius: 10px;
@@ -53,15 +63,9 @@ margin-left: 70px;
   border:2px solid black;
 }
 
-#hiddenC{
-  visibility: hidden;
-  height: 1px;
-  width: 0px;
-  display: none;
-}
 
-#visibleC{
-  visibility: visible;
+.hidden{
+  visibility: hidden;
 }
 
 #hiddenF{
@@ -87,7 +91,16 @@ margin-left: 70px;
 .veloci{
   opacity: 10%;
   position:absolute;
-  left:400px;
-  top:-100px;
+  /* left:400px;
+  top:-10px; */
 
+}
+
+.change{
+  border:2px solid black;
+  margin:1rem;
+  padding:5px;
+  border-radius: 5px;
+  background-color:#282c34;
+  color: aliceblue;
 }

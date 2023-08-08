@@ -29,7 +29,8 @@ function Wheel(props) {
 
     const fetchBlogs1 = {
         method: 'GET',
-        url: 'http://localhost:8000/blogs',
+        url: `${process.env.REACT_APP_API_HOST}//blogs`,
+        // const categoryUrl = `${process.env.REACT_APP_API_HOST}/api/categories/`;
     }
 
     useEffect(() => {

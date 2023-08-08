@@ -16,7 +16,15 @@ function App() {
   const [color, setColor] = useColor("hex", "#121212");
   const [text, setText] = useState("");
   const [actColor, setActColor]=useState("")
+  const [hidden, setHidden]=useState("hidden")
 
+  const setHiddenColor = () => {
+    if (hidden=="custom-color-picker"){
+    setHidden("hidden")
+    }else if(hidden=="hidden"){
+      setHidden("custom-color-picker")
+    }
+  };
 
   useEffect(() => {
     // document.body.style.backgroundColor = color.hex;
@@ -44,13 +52,13 @@ function App() {
 
   return (
     <>
-      <div className="app">
+      <div className="app" id="parallax">
 
         <BrowserRouter>
         <Nav text={text}/>
-        {/* <img src="./shutterstock_379752358.webp" style={{width:100}}></img> */}
-        <GithubPicker className="custom-color-picker" onChangeComplete={ setColor } />
-    <img className="veloci" src="./veloci.png" style={{width:1500, position:"background"}}/>
+        <button className="change" onClick={setHiddenColor}>Change Theme</button>
+        <GithubPicker className={hidden} onChangeComplete={ setColor } />
+    {/* <img className="veloci" src="./veloci.png" style={{width:1500, position:"background"}}/> */}
           <Routes>
             <Route path="/Wheel" element={<Wheel text={text} color={actColor}/>} />
             <Route path="/Comment" element={<Comment text={text} color={actColor}/>} />
