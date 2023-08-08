@@ -7,8 +7,8 @@ colorama==0.4.3
 cryptography==2.8
 databases==0.7.0
 h11==0.14.0
-httplib2==0.14.0
-httptools==0.1.2
+# httplib2==0.14.0
+# httptools==0.1.2
 idna==2.8
 keyring==18.0.1
 pycryptodome==3.18.0
