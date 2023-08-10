@@ -60,7 +60,7 @@ function App() {
         <GithubPicker className={hidden} onChangeComplete={ setColor } />
     {/* <img className="veloci" src="./veloci.png" style={{width:1500, position:"background"}}/> */}
           <Routes>
-            <Route path="/Wheel" element={<Wheel text={text} color={actColor}/>} />
+            <Route path="/" element={<Wheel text={text} color={actColor}/>} />
             <Route path="/Comment" element={<Comment text={text} color={actColor}/>} />
 
           </Routes>

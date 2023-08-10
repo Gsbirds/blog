@@ -5,11 +5,10 @@ body{
   opacity: .9;
 
   min-height: 500px;
-
   background-attachment: fixed;
   background-position: center;
   background-repeat: no-repeat;
-  background-size: cover;
+  background-size: contain;
   background-image:url( /home/gux/NewPortfolio/newportfolio/public/veloci.png);
 }
 
@@ -59,7 +58,6 @@ margin-left: 70px;
 #comment-box{
   width:800px;
   border-radius: 15px;
-  height:424px;
   border:2px solid black;
 }
 
@@ -96,6 +94,10 @@ margin-left: 70px;
 
 }
 
+#comments{
+  margin:10px;
+}
+
 .change{
   border:2px solid black;
   margin:1rem;
@@ -103,4 +105,19 @@ margin-left: 70px;
   border-radius: 5px;
   background-color:#282c34;
   color: aliceblue;
+}
+
+@media (max-width:950px) {
+
+  #comment-box{
+    width:350px;
+    height: 475px;
+  }
+
+  li{
+    margin-right: 20px;
+  }
+
+
+
 }

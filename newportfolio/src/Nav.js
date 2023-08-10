@@ -51,17 +51,17 @@ function Nav(props) {
             >
                 <span className="navbar-toggler-icon"></span>
             </button>
-            <div className="collapse navbar-collapse" id="navbarNav">
+            <div className="navbar" id="navbarNav">
                 <b>
                 <ul className="navbar-nav">
                     
 
-            <li> <NavLink style={{color: props.text}} className="nav-link" aria-current="page" to="/Wheel">
+            <li> <NavLink style={{color: props.text}} className="nav-link" aria-current="page" to="/">
                             Blog
                         </NavLink></li>
-                        <li> <NavLink style={{color: props.text}} className="nav-link" aria-current="page" to="/Wheel">
+                        {/* <li> <NavLink style={{color: props.text}} className="nav-link" aria-current="page" to="/">
                             About this bitch
-                        </NavLink></li>
+                        </NavLink></li> */}
 
                 </ul>
                 </b>

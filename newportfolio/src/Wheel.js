@@ -29,7 +29,7 @@ function Wheel(props) {
 
     const fetchBlogs1 = {
         method: 'GET',
-        url: `${process.env.REACT_APP_API_HOST}//blogs`,
+        url: `https://calm-reef-66202-3443b850ed8c.herokuapp.com/blogs`,
         // const categoryUrl = `${process.env.REACT_APP_API_HOST}/api/categories/`;
     }
 
@@ -48,7 +48,7 @@ function Wheel(props) {
 
     const fetchComments1 = {
         method: 'GET',
-        url: 'http://localhost:8000/comments',
+        url: 'https://calm-reef-66202-3443b850ed8c.herokuapp.com/comments',
     }
     useEffect(() => {
         const fetchComments = async () => {
@@ -67,7 +67,7 @@ function Wheel(props) {
         <>
             <h1 className="blog-title" style={{ color: props.text }}>An uninspired blog.</h1>
             <b>
-                <p className="poem"><ul style={{ color: props.text }}>
+                <p className="poem"><ul style={{ color: 'black'}}>
                     <li>I'm Nobody! Who are you?</li>
                     <li>Are you - Nobody - too?</li>
                     <li>Then there's the pair of us!</li>
@@ -106,12 +106,15 @@ function Wheel(props) {
                   .map((c) => (
                     <div
                       key={c.blogs_id}
-                      style={{ backgroundColor: props.color, width: 900 }}
+                      style={{ backgroundColor: props.color}}
                       className="container"
+                      id="comments"
                     >
+                        <p style={{ color: props.text }}>{c.name}</p>
                       <b>
                         {/* Render the filtered comments' titles */}
                         <p style={{ color: props.text }}>{c.title}</p>
+                        <p style={{ color: props.text }}>{c.text}</p>
                       </b>
                     </div>
                   ))}

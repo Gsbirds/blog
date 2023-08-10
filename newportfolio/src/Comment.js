@@ -39,7 +39,7 @@ function Comment(props) {
       data.date= date;
       data.blogs_id = props.blogid;
   
-      const Url = "http://localhost:8000/comments";
+      const Url = "https://calm-reef-66202-3443b850ed8c.herokuapp.com/comments";
       const fetchConfig = {
         method: "post",
         body: JSON.stringify(data)
@@ -88,18 +88,18 @@ function Comment(props) {
               />
               <label htmlFor="presenter_name">Name</label>
             </div>
-            <div className="form-floating mb-3">
-              <input
+            <div className="form-group" >
+              <textarea
                 type="text"
                 onChange={handleTextChange}
                 value={text}
-                placeholder="text"
-                id="text"
+                placeholder="Your comment"
                 className="form-control"
+                rows="4"
+                id="exampleFormControlTextarea1"
               />
               <label htmlFor="presenter_name">Text</label>
             </div>
-       
             <div className="form-floating mb-3">
               <input
                 className="form-control"
