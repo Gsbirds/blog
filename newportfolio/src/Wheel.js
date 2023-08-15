@@ -3,6 +3,8 @@ import './App.css';
 import { useState, useEffect } from "react";
 import axios from 'axios';
 import Comment from "./Comment";
+import ReactMarkdown from 'react-markdown';
+import DOMPurify from 'dompurify';
 
 function Wheel(props) {
     const [blog, setBlog] = useState("");
@@ -90,7 +92,9 @@ function Wheel(props) {
               <div key={blog.id} style={{ backgroundColor: props.text }} className="container">
                 <b>
                   <p style={{ color: props.color }}>{blog.title}</p>
-                  <p style={{ color: props.color }}>{blog.text}</p>
+                  <p style={{ color: props.color }} dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(blog.text) }}/>
+
+
                 </b>
 
                 <p
@@ -114,9 +118,13 @@ function Wheel(props) {
                       <b>
                         {/* Render the filtered comments' titles */}
                         <p style={{ color: props.text }}>{c.title}</p>
-                        <p style={{ color: props.text }}>{c.text}</p>
+                      
+                        <p style={{ color: props.text }} dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(c.text)}}/>
+                        <ReactMarkdown source={c.text} escapeHtml={false} />
+
                       </b>
                     </div>
+                    
                   ))}
               </div>
             );
@@ -134,6 +142,7 @@ function Wheel(props) {
       ) : (
         ""
       )}
+      
     </>
   );
 }

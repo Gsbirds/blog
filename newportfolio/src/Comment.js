@@ -98,7 +98,7 @@ function Comment(props) {
                 rows="4"
                 id="exampleFormControlTextarea1"
               />
-              <label htmlFor="presenter_name">Text</label>
+              <label htmlFor="presenter_name"></label>
             </div>
             <div className="form-floating mb-3">
               <input
