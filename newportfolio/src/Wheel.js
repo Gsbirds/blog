@@ -31,7 +31,7 @@ function Wheel(props) {
 
     const fetchBlogs1 = {
         method: 'GET',
-        url: `https://calm-reef-66202-3443b850ed8c.herokuapp.com/blogs`,
+        url: 'https://calm-reef-66202-3443b850ed8c.herokuapp.com/blogs',
         // const categoryUrl = `${process.env.REACT_APP_API_HOST}/api/categories/`;
     }
 
@@ -91,7 +91,7 @@ function Wheel(props) {
             elements.push(
               <div key={blog.id} style={{ backgroundColor: props.text }} className="container">
                 <b>
-                  <p style={{ color: props.color }}>{blog.title}</p>
+                  <h1 style={{ color: props.color }}>{blog.title}</h1>
                   <p style={{ color: props.color }} dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(blog.text) }}/>
 
 
