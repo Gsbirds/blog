@@ -60,26 +60,6 @@ class Comment(Base):
 # Create tables if they don't exist
 Base.metadata.create_all(bind=engine)
 
-
-async def authentication_middleware(request, call_next):
-    # Define routes that require authentication
-    protected_routes = ["/blogs"]  # Add more as needed
-
-    if request.url.path in protected_routes:
-        data = await request.json()
-        username = data.get("username")
-        password = data.get("password")
-
-        session = SessionLocal()
-        user = session.query(User).filter_by(username=username).first()
-        session.close()
-
-        if not (user and user.check_password(password)):
-            return JSONResponse({"message": "Authentication required"}, status_code=401)
-
-    response = await call_next(request)
-    return response
-
 # def create_user(username, password):
 #     session = SessionLocal()
 #     new_user = User(username=username)
@@ -301,7 +281,6 @@ async def protected_list_blogs(request):
 app = Starlette()
 
 # Define routes
-# app.add_route("/blogs", add_blog, methods=["POST"])
 app.add_route("/blogs", add_blog, methods=["POST"])
 app.add_route("/blogs", list_blogs, methods=["GET"])
 app.add_route("/blogs/{id}", delete_blog, methods=["DELETE"])
@@ -336,9 +315,3 @@ app.mount("/static", StaticFiles(directory="build/static"), name="static")
 @app.route("/")
 async def index(request):
     return HTMLResponse(open("./build/index.html", "r").read())
-
-
-@app.route("/")
-async def index(request):
-    with open("./build/index.html") as f:
-        return HTMLResponse(f.read())
