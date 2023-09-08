@@ -7,84 +7,84 @@ import ReactMarkdown from 'react-markdown';
 import DOMPurify from 'dompurify';
 
 function Wheel(props) {
-    const [blog, setBlog] = useState("");
-    const [comment, setComment] = useState("");
-    const [hiddenF, setHiddenF] = useState("hiddenF");
-    const [arrow, setArrow] = useState("arrow");
-    const [activeArrow, setActiveArrow] = useState({});
+  const [blog, setBlog] = useState("");
+  const [comment, setComment] = useState("");
+  const [hiddenF, setHiddenF] = useState("hiddenF");
+  const [arrow, setArrow] = useState("arrow");
+  const [activeArrow, setActiveArrow] = useState({});
 
-    const showComments = (key) => {
-      setActiveArrow((prevActiveArrows) => ({
-        ...prevActiveArrows,
-        [key]: !prevActiveArrows[key],
-      }));
-    };
+  const showComments = (key) => {
+    setActiveArrow((prevActiveArrows) => ({
+      ...prevActiveArrows,
+      [key]: !prevActiveArrows[key],
+    }));
+  };
 
 
-    const addComments = () => {
-        if (hiddenF == "hiddenF") {
-            setHiddenF("visibleF");
-        } else {
-            setHiddenF("hiddenF")
-        }
-    };
-
-    const fetchBlogs1 = {
-        method: 'GET',
-        url: 'https://calm-reef-66202-3443b850ed8c.herokuapp.com/blogs',
-        // const categoryUrl = `${process.env.REACT_APP_API_HOST}/api/categories/`;
+  const addComments = () => {
+    if (hiddenF == "hiddenF") {
+      setHiddenF("visibleF");
+    } else {
+      setHiddenF("hiddenF")
     }
+  };
 
-    useEffect(() => {
-        const fetchBlogs = async () => {
-            axios.get(fetchBlogs1.url).then((response) => {
-                setBlog(response.data)
-                console.log(blog)
+  const fetchBlogs1 = {
+    method: 'GET',
+    url: 'https://calm-reef-66202-3443b850ed8c.herokuapp.com/blogs',
+    // const categoryUrl = `${process.env.REACT_APP_API_HOST}/api/categories/`;
+  }
 
-            }).catch((error) => {
-                console.error(error)
-            })
-        }
-        fetchBlogs()
-    }, []);
+  useEffect(() => {
+    const fetchBlogs = async () => {
+      axios.get(fetchBlogs1.url).then((response) => {
+        setBlog(response.data)
+        console.log(blog)
 
-    const fetchComments1 = {
-        method: 'GET',
-        url: 'https://calm-reef-66202-3443b850ed8c.herokuapp.com/comments',
+      }).catch((error) => {
+        console.error(error)
+      })
     }
-    useEffect(() => {
-        const fetchComments = async () => {
-            axios.get(fetchComments1.url).then((response) => {
-                setComment(response.data)
-                console.group(comment)
+    fetchBlogs()
+  }, []);
 
-            }).catch((error) => {
-                console.error(error)
-            })
-        }
-        fetchComments()
-    }, []);
-    // const colorPicker = document.getElementById("color-picker");
-    return (
-        <>
-            <h1 className="blog-title" style={{ color: props.text }}>An uninspired blog.</h1>
-            <b>
-                <p className="poem"><ul style={{ color: 'black'}}>
-                    <li>I'm Nobody! Who are you?</li>
-                    <li>Are you - Nobody - too?</li>
-                    <li>Then there's the pair of us!</li>
-                    <li>Don't tell! They'd advertise- you know!</li>
-                    <li>How dreary -to be- somebody</li>
-                    <li>How public -like a Frog- </li>
-                    <li>To tell one's name- the livelong June-</li>
-                    <li>To an admiring Bog!</li>
+  const fetchComments1 = {
+    method: 'GET',
+    url: 'https://calm-reef-66202-3443b850ed8c.herokuapp.com/comments',
+  }
+  useEffect(() => {
+    const fetchComments = async () => {
+      axios.get(fetchComments1.url).then((response) => {
+        setComment(response.data)
+        console.group(comment)
 
-                    - I'm Nobody! Who are you?
-                    Emily Dickinson
-                </ul></p>
-            </b>
+      }).catch((error) => {
+        console.error(error)
+      })
+    }
+    fetchComments()
+  }, []);
+  // const colorPicker = document.getElementById("color-picker");
+  return (
+    <>
+      <h1 className="blog-title" style={{ color: props.text }}>An uninspired blog.</h1>
+      <b>
+        <p className="poem"><ul style={{ color: 'black' }}>
+          <li>I'm Nobody! Who are you?</li>
+          <li>Are you - Nobody - too?</li>
+          <li>Then there's the pair of us!</li>
+          <li>Don't tell! They'd advertise- you know!</li>
+          <li>How dreary -to be- somebody</li>
+          <li>How public -like a Frog- </li>
+          <li>To tell one's name- the livelong June-</li>
+          <li>To an admiring Bog!</li>
 
-            {blog.length ? (
+          - I'm Nobody! Who are you?
+          Emily Dickinson
+        </ul></p>
+      </b>
+
+      {blog.length ? (
         <>
           {blog.map((blog) => {
             const elements = [];
@@ -92,7 +92,7 @@ function Wheel(props) {
               <div key={blog.id} style={{ backgroundColor: props.text }} className="container">
                 <b>
                   <h1 style={{ color: props.color }}>{blog.title}</h1>
-                  <p style={{ color: props.color }} dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(blog.text) }}/>
+                  <p style={{ color: props.color }} dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(blog.text) }} />
 
 
                 </b>
@@ -110,21 +110,21 @@ function Wheel(props) {
                   .map((c) => (
                     <div
                       key={c.blogs_id}
-                      style={{ backgroundColor: props.color}}
+                      style={{ backgroundColor: props.color }}
                       className="container"
                       id="comments"
                     >
-                        <p style={{ color: props.text }}>{c.name}</p>
+                      <p style={{ color: props.text }}>{c.name}</p>
                       <b>
                         {/* Render the filtered comments' titles */}
                         <p style={{ color: props.text }}>{c.title}</p>
-                      
-                        <p style={{ color: props.text }} dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(c.text)}}/>
+
+                        <p style={{ color: props.text }} dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(c.text) }} />
                         <ReactMarkdown source={c.text} escapeHtml={false} />
 
                       </b>
                     </div>
-                    
+
                   ))}
               </div>
             );
@@ -142,7 +142,7 @@ function Wheel(props) {
       ) : (
         ""
       )}
-      
+
     </>
   );
 }

@@ -1,6 +1,7 @@
 import React from "react";
 import './App.css';
 import { useState, useEffect } from "react";
+import DOMPurify from 'dompurify';
 
 function Comment(props) {
     const [comment, setComment] = useState("");
@@ -33,10 +34,10 @@ function Comment(props) {
       // create an empty JSON object
       const data = {};
   
-      data.title = title
-      data.name = name;
-      data.text = text;
-      data.date= date;
+      data.title = DOMPurify.sanitize(title); 
+      data.name = DOMPurify.sanitize(name); 
+      data.text = DOMPurify.sanitize(text); 
+      data.date= DOMPurify.sanitize(date); 
       data.blogs_id = props.blogid;
   
       const Url = "https://calm-reef-66202-3443b850ed8c.herokuapp.com/comments";
