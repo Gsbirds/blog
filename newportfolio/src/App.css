@@ -59,6 +59,8 @@ margin-left: 70px;
   width:800px;
   border-radius: 15px;
   border:2px solid black;
+  margin: -80px;
+  padding:30px;
 }
 
 
@@ -111,7 +113,7 @@ margin-left: 70px;
 
   #comment-box{
     width:350px;
-    height: 475px;
+    height: 500px;
   }
 
   li{
@@ -119,5 +121,11 @@ margin-left: 70px;
   }
 
 
+  .container{
+    border-radius: 10px;
+    margin: 5px;
+    padding:30px;
+    
+  }
 
 }
