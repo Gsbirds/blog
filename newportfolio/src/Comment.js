@@ -56,7 +56,6 @@ function Comment(props) {
       }
     };
   
-
     // const colorPicker = document.getElementById("color-picker");
     return (
    <>
