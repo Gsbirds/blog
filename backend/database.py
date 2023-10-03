@@ -36,14 +36,18 @@ class User(Base):
 
     def check_password(self, password):
         return check_password_hash(self.password_hash, password)
-    
+
+
 class Blog(Base):
     __tablename__ = "blogs"
     id = Column(Integer, primary_key=True, index=True)
     text = Column(Text)
     title = Column(String)
     date = Column(String)
-    comments = relationship("Comment", back_populates="blog", cascade="all, delete-orphan")
+    comments = relationship(
+        "Comment", back_populates="blog", cascade="all, delete-orphan"
+    )
+
 
 class Comment(Base):
     __tablename__ = "comments"
@@ -75,6 +79,7 @@ Base.metadata.create_all(bind=engine)
 
 # Main application code.
 
+
 async def list_users(request):
     session = SessionLocal()
     users = session.query(User).all()
@@ -87,6 +92,7 @@ async def list_users(request):
     ]
     session.close()
     return JSONResponse(user_list)
+
 
 async def login(request):
     data = await request.json()
@@ -109,15 +115,11 @@ async def list_blogs(request):
     session = SessionLocal()
     blogs = session.query(Blog).all()
     content = [
-        {
-            "text": blog.text,
-            "title": blog.title,
-            "id": blog.id
-        }
-        for blog in blogs
+        {"text": blog.text, "title": blog.title, "id": blog.id} for blog in blogs
     ]
     session.close()
     return JSONResponse(content)
+
 
 async def add_blog(request):
     username = request.query_params.get("username")
@@ -148,6 +150,7 @@ async def add_blog(request):
     session.close()
     return JSONResponse(data)
 
+
 async def delete_blog(request):
     username = request.query_params.get("username")
     password = request.query_params.get("password")
@@ -176,6 +179,7 @@ async def delete_blog(request):
     session.close()
     return JSONResponse({"message": "Blog successfully deleted"})
 
+
 async def update_blog(request):
     username = request.query_params.get("username")
     password = request.query_params.get("password")
@@ -202,6 +206,7 @@ async def update_blog(request):
     session.close()
     return JSONResponse({"message": "Blog successfully updated"})
 
+
 async def list_comments(request):
     session = SessionLocal()
     comments = session.query(Comment).all()
@@ -211,12 +216,13 @@ async def list_comments(request):
             "title": comment.title,
             "date": comment.date,
             "name": comment.name,
-            "blogs_id": comment.blogs_id
+            "blogs_id": comment.blogs_id,
         }
         for comment in comments
     ]
     session.close()
     return JSONResponse(content)
+
 
 async def delete_comment(request):
     comment_id = request.path_params.get("id")
@@ -225,6 +231,7 @@ async def delete_comment(request):
     session.commit()
     session.close()
     return JSONResponse({"message": "Comment successfully deleted"})
+
 
 async def update_comment(request):
     comment_id = request.path_params.get("id")
@@ -235,6 +242,7 @@ async def update_comment(request):
     session.close()
     return JSONResponse({"message": "Comment successfully updated"})
 
+
 async def add_comment(request):
     data = await request.json()
     new_comment = Comment(**data)
@@ -243,6 +251,7 @@ async def add_comment(request):
     session.commit()
     session.close()
     return JSONResponse(data)
+
 
 async def protected_list_blogs(request):
     # Get the username and password from query parameters or headers
@@ -268,15 +277,11 @@ async def protected_list_blogs(request):
     session = SessionLocal()
     blogs = session.query(Blog).all()
     content = [
-        {
-            "text": blog.text,
-            "title": blog.title,
-            "id": blog.id
-        }
-        for blog in blogs
+        {"text": blog.text, "title": blog.title, "id": blog.id} for blog in blogs
     ]
     session.close()
     return JSONResponse(content)
+
 
 app = Starlette()
 
@@ -310,6 +315,7 @@ app.add_middleware(
 # Add authentication middleware
 # Serve static files (e.g., index.html) from the 'static' folder
 app.mount("/static", StaticFiles(directory="build/static"), name="static")
+
 
 # Define a route to serve the index.html file
 @app.route("/")

@@ -5,24 +5,23 @@ import Wheel from "./Wheel";
 import { ColorPicker, useColor } from "react-color-palette";
 import "react-color-palette/lib/css/styles.css";
 import React, { Component } from "react";
-import { GithubPicker } from 'react-color';
-import { CustomPicker } from 'react-color';
-import Nav from "./Nav.js"
+import { GithubPicker } from "react-color";
+import { CustomPicker } from "react-color";
+import Nav from "./Nav.js";
 import Comment from "./Comment";
 
 function App() {
-
   // ///////////////////////////////////////////////////////////////
   const [color, setColor] = useColor("hex", "#121212");
   const [text, setText] = useState("");
-  const [actColor, setActColor]=useState("")
-  const [hidden, setHidden]=useState("hidden")
+  const [actColor, setActColor] = useState("");
+  const [hidden, setHidden] = useState("hidden");
 
   const setHiddenColor = () => {
-    if (hidden=="custom-color-picker"){
-    setHidden("hidden")
-    }else if(hidden=="hidden"){
-      setHidden("custom-color-picker")
+    if (hidden == "custom-color-picker") {
+      setHidden("hidden");
+    } else if (hidden == "hidden") {
+      setHidden("custom-color-picker");
     }
   };
 
@@ -42,27 +41,33 @@ function App() {
     // Convert the lighter RGB values back to HEX
     const lighterHex =
       "#" +
-      (lighterRed < 16 ? "0" : "") + lighterRed.toString(16) +
-      (lighterGreen < 16 ? "0" : "") + lighterGreen.toString(16) +
-      (lighterBlue < 16 ? "0" : "") + lighterBlue.toString(16);
-      document.body.style.backgroundColor = lighterHex;
-      setActColor(lighterHex)
+      (lighterRed < 16 ? "0" : "") +
+      lighterRed.toString(16) +
+      (lighterGreen < 16 ? "0" : "") +
+      lighterGreen.toString(16) +
+      (lighterBlue < 16 ? "0" : "") +
+      lighterBlue.toString(16);
+    document.body.style.backgroundColor = lighterHex;
+    setActColor(lighterHex);
     setText(color.hex);
   }, [color]); // This effect will only trigger when the 'color' state changes
 
   return (
     <>
       <div className="app" id="parallax">
-
         <BrowserRouter>
-        <Nav text={text}/>
-        <button className="change" onClick={setHiddenColor}>Change Theme</button>
-        <GithubPicker className={hidden} onChangeComplete={ setColor } />
-    {/* <img className="veloci" src="./veloci.png" style={{width:1500, position:"background"}}/> */}
+          <Nav text={text} />
+          <button className="change" onClick={setHiddenColor}>
+            Change Theme
+          </button>
+          <GithubPicker className={hidden} onChangeComplete={setColor} />
+          {/* <img className="veloci" src="./veloci.png" style={{width:1500, position:"background"}}/> */}
           <Routes>
-            <Route path="/" element={<Wheel text={text} color={actColor}/>} />
-            <Route path="/Comment" element={<Comment text={text} color={actColor}/>} />
-
+            <Route path="/" element={<Wheel text={text} color={actColor} />} />
+            <Route
+              path="/Comment"
+              element={<Comment text={text} color={actColor} />}
+            />
           </Routes>
         </BrowserRouter>
       </div>

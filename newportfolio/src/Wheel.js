@@ -1,10 +1,10 @@
 import React from "react";
-import './App.css';
+import "./App.css";
 import { useState, useEffect } from "react";
-import axios from 'axios';
+import axios from "axios";
 import Comment from "./Comment";
-import ReactMarkdown from 'react-markdown';
-import DOMPurify from 'dompurify';
+import ReactMarkdown from "react-markdown";
+import DOMPurify from "dompurify";
 
 function Wheel(props) {
   const [blog, setBlog] = useState("");
@@ -20,68 +20,73 @@ function Wheel(props) {
     }));
   };
 
-
   const addComments = () => {
     if (hiddenF == "hiddenF") {
       setHiddenF("visibleF");
     } else {
-      setHiddenF("hiddenF")
+      setHiddenF("hiddenF");
     }
   };
 
   const fetchBlogs1 = {
-    method: 'GET',
-    url: 'https://calm-reef-66202-3443b850ed8c.herokuapp.com/blogs',
+    method: "GET",
+    url: "https://calm-reef-66202-3443b850ed8c.herokuapp.com/blogs",
     // const categoryUrl = `${process.env.REACT_APP_API_HOST}/api/categories/`;
-  }
+  };
 
   useEffect(() => {
     const fetchBlogs = async () => {
-      axios.get(fetchBlogs1.url).then((response) => {
-        setBlog(response.data)
-        console.log(blog)
-
-      }).catch((error) => {
-        console.error(error)
-      })
-    }
-    fetchBlogs()
+      axios
+        .get(fetchBlogs1.url)
+        .then((response) => {
+          setBlog(response.data);
+          console.log(blog);
+        })
+        .catch((error) => {
+          console.error(error);
+        });
+    };
+    fetchBlogs();
   }, []);
 
   const fetchComments1 = {
-    method: 'GET',
-    url: 'https://calm-reef-66202-3443b850ed8c.herokuapp.com/comments',
-  }
+    method: "GET",
+    url: "https://calm-reef-66202-3443b850ed8c.herokuapp.com/comments",
+  };
   useEffect(() => {
     const fetchComments = async () => {
-      axios.get(fetchComments1.url).then((response) => {
-        setComment(response.data)
-        console.group(comment)
-
-      }).catch((error) => {
-        console.error(error)
-      })
-    }
-    fetchComments()
+      axios
+        .get(fetchComments1.url)
+        .then((response) => {
+          setComment(response.data);
+          console.group(comment);
+        })
+        .catch((error) => {
+          console.error(error);
+        });
+    };
+    fetchComments();
   }, []);
   // const colorPicker = document.getElementById("color-picker");
   return (
     <>
-      <h1 className="blog-title" style={{ color: props.text }}>An uninspired blog.</h1>
+      <h1 className="blog-title" style={{ color: props.text }}>
+        An uninspired blog.
+      </h1>
       <b>
-        <p className="poem"><ul style={{ color: 'black' }}>
-          <li>I'm Nobody! Who are you?</li>
-          <li>Are you - Nobody - too?</li>
-          <li>Then there's the pair of us!</li>
-          <li>Don't tell! They'd advertise- you know!</li>
-          <li>How dreary -to be- somebody</li>
-          <li>How public -like a Frog- </li>
-          <li>To tell one's name- the livelong June-</li>
-          <li>To an admiring Bog!</li>
-
-          - I'm Nobody! Who are you?
-          Emily Dickinson
-        </ul></p>
+        <p className="poem">
+          <ul style={{ color: "black" }}>
+            <li>I'm Nobody! Who are you?</li>
+            <li>Are you - Nobody - too?</li>
+            <li>Then there's the pair of us!</li>
+            <li>Don't tell! They'd advertise- you know!</li>
+            <li>How dreary -to be- somebody</li>
+            <li>How public -like a Frog- </li>
+            <li>To tell one's name- the livelong June-</li>
+            <li>To an admiring Bog!</li>- I'm Nobody! Who are you? Emily
+            Dickinson
+          </ul>
+        </p>
       </b>
 
       {blog.length ? (
@@ -89,12 +94,19 @@ function Wheel(props) {
           {blog.map((blog) => {
             const elements = [];
             elements.push(
-              <div key={blog.id} style={{ backgroundColor: props.text }} className="container">
+              <div
+                key={blog.id}
+                style={{ backgroundColor: props.text }}
+                className="container"
+              >
                 <b>
                   <h1 style={{ color: props.color }}>{blog.title}</h1>
-                  <p style={{ color: props.color }} dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(blog.text) }} />
-
-
+                  <p
+                    style={{ color: props.color }}
+                    dangerouslySetInnerHTML={{
+                      __html: DOMPurify.sanitize(blog.text),
+                    }}
+                  />
                 </b>
 
                 <p
@@ -119,21 +131,33 @@ function Wheel(props) {
                         {/* Render the filtered comments' titles */}
                         <p style={{ color: props.text }}>{c.title}</p>
 
-                        <p style={{ color: props.text }} dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(c.text) }} />
+                        <p
+                          style={{ color: props.text }}
+                          dangerouslySetInnerHTML={{
+                            __html: DOMPurify.sanitize(c.text),
+                          }}
+                        />
                         <ReactMarkdown source={c.text} escapeHtml={false} />
-
                       </b>
                     </div>
-
                   ))}
-              </div>
+              </div>,
             );
 
             elements.push(
-              <p className="arrow" onClick={addComments} style={{ color: props.text, fontSize: 50 }} key={`comment_${blog.id}`}>
+              <p
+                className="arrow"
+                onClick={addComments}
+                style={{ color: props.text, fontSize: 50 }}
+                key={`comment_${blog.id}`}
+              >
                 <b>Comment</b>
               </p>,
-              <Comment hiddenF={hiddenF} blogid={blog.id} key={`comment_${blog.id}`} />
+              <Comment
+                hiddenF={hiddenF}
+                blogid={blog.id}
+                key={`comment_${blog.id}`}
+              />,
             );
 
             return elements;
@@ -142,13 +166,8 @@ function Wheel(props) {
       ) : (
         ""
       )}
-
     </>
   );
 }
 
 export default Wheel;
-
-
-
-

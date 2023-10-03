@@ -1,5 +1,5 @@
-import React from 'react';
-import { CustomPicker } from 'react-color';
+import React from "react";
+import { CustomPicker } from "react-color";
 
 class MyColorPicker extends React.Component {
   render() {
