@@ -15,7 +15,7 @@ from werkzeug.security import generate_password_hash, check_password_hash
 
 
 # Retrieve the original DATABASE_URL
-original_db_url = os.environ.get("DATABASE_URL1")
+original_db_url = os.environ.get("DATABASE_URL3")
 
 # Create SQLAlchemy engine and session
 engine = create_engine(original_db_url)
